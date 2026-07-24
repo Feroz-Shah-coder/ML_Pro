@@ -5,7 +5,11 @@ from src.logger import logging
 import pandas as pd 
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass ## (( Used to class variables ))
+
+from src.components.data_transfermation import DataTransformation
+from src.components.data_transfermation import DataTransformationConfig
 ## that are the modular coding here in the python 
+
 @dataclass
 
 class DataIngestionConfig:
@@ -22,6 +26,7 @@ class DataIngestion:
         try:
             df = pd.read_csv("notebook\data\StudentsPerformance.csv")
             logging.info("Read data from DataFram")
+            
             os.makedirs(os.path.dirname(self.data_ingestion.train_data_path), exist_ok= True)
 
 
@@ -47,6 +52,9 @@ class DataIngestion:
 
 if __name__ == "__main__":
     obj = DataIngestion()
-    obj.initaite_data_ingestion()
+    train_data, test_data = obj.initaite_data_ingestion()
+
+    data_transfermation = DataTransformation()
+    data_transfermation.initiate_data_transformation(train_data, test_data)
 
 
