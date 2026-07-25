@@ -10,6 +10,9 @@ from src.components.data_transfermation import DataTransformation
 from src.components.data_transfermation import DataTransformationConfig
 ## that are the modular coding here in the python 
 
+from src.components.model_trainer import ModelTrainer
+from src.components.model_trainer import ModelTrainerConfig
+
 @dataclass
 
 class DataIngestionConfig:
@@ -55,6 +58,9 @@ if __name__ == "__main__":
     train_data, test_data = obj.initaite_data_ingestion()
 
     data_transfermation = DataTransformation()
-    data_transfermation.initiate_data_transformation(train_data, test_data)
+    train_arr, test_arr = data_transfermation.initiate_data_transformation(train_data, test_data)
+
+    model_trainer = ModelTrainer()
+    print(model_trainer.initiate_model_trainer(train_arr, test_arr))
 
 
